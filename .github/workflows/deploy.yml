@@ -19,7 +19,7 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /tmp
-          rm rf /tmp/vue-demo-by-cli
+          rm -rf /tmp/vue-demo-by-cli
           git clone -b master https://github.com/JoiceRabbit/vue-demo-by-cli.git
           cd /tmp/vue-demo-by-cli
           # 为deploy.sh设置执行权限
