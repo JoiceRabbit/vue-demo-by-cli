@@ -3,14 +3,13 @@ name: 'deploy vue-demo-by-cli to server'
 on: 
   push:
     branches:    
-      - main
+      - master
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    
     - name: Deploy
       uses: appleboy/ssh-action@master
       with:
@@ -20,7 +19,7 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /tmp
-          git clone https://github.com/JoiceRabbit/vue-demo-by-cli.git
+          git clone -b master https://github.com/JoiceRabbit/vue-demo-by-cli.git
           cd /tmp/vue-demo-by-cli
           # 为deploy.sh设置执行权限
           chmod +x ./deploy.sh
