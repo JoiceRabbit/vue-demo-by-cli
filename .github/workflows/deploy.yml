@@ -1,0 +1,29 @@
+name: 'deploy vue-demo-by-cli to server'
+
+on: 
+  push:
+    branches:    
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - name: Deploy
+      use: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd /tmp
+          git clone https://github.com/JoiceRabbit/vue-demo-by-cli.git
+          cd /tmp/vue-demo-by-cli
+          # 为deploy.sh设置执行权限
+          chmod +x ./deploy.sh
+          # 执行脚本
+          ./deploy.sh
+
